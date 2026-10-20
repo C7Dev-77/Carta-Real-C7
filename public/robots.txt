@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cristian14og.github.io/sitemap.xml
+Sitemap: https://c7dev-77.github.io/Carta-Real-C7/sitemap.xml

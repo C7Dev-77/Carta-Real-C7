@@ -24,16 +24,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build with Vite
-        run: npm run build
+      - name: Prepare static site bundle
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          if [ -d "public" ]; then
+            cp -r public/* _site/ 2>/dev/null || true
+            cp -r public _site/public 2>/dev/null || true
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -41,7 +39,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
