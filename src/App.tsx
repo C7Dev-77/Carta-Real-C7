@@ -8,7 +8,7 @@ import {
 import { GoldParticlesCanvas } from './components/GoldParticlesCanvas';
 
 const AUDIO_SOURCES = [
-  '/Carta_Real.mp3',
+  './Carta_Real.mp3',
   'https://raw.githubusercontent.com/Cristian14og/Archivos-C7dev/main/Carta%20Real.mp3',
   'https://cdn.jsdelivr.net/gh/Cristian14og/Archivos-C7dev@main/Carta%20Real.mp3',
 ];
@@ -333,7 +333,7 @@ export default function App() {
         {/* 1. Fondo base con la imagen carta real OG */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <img
-            src="/assets/aistudio/carta_real_OG_ef0c69ed.png"
+            src="./assets/aistudio/carta_real_OG_ef0c69ed.png"
             alt="Escena nocturna Carta Real"
             className="w-full h-full object-cover object-center opacity-90"
           />
@@ -511,7 +511,7 @@ export default function App() {
                   className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-xl overflow-hidden border border-amber-400/50 shadow-[0_0_15px_rgba(255,215,0,0.25)] shrink-0 group cursor-pointer"
                 >
                   <img
-                    src="/assets/aistudio/carta_real_miky_db47513c.png"
+                    src="./assets/aistudio/carta_real_miky_db47513c.png"
                     alt="Portada Carta Real"
                     className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
                   />
