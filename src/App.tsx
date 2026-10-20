@@ -273,7 +273,7 @@ export default function App() {
   const formattedTimeLabel = formatTimeLabel(currentTime, effectiveDuration);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden select-none bg-[#050407]">
+    <div className="relative w-full h-[100dvh] overflow-hidden select-none bg-[#050407]">
       {/* Audio Real de Carta Real */}
       <audio
         ref={audioRef}
@@ -314,7 +314,7 @@ export default function App() {
           FASE 1: PANTALLA DE BIENVENIDA (LANDING)
           ========================================== */}
       {isLandingVisible && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050407] transition-opacity duration-1000 px-4 text-center">
+        <div className="fixed inset-0 h-[100dvh] z-50 flex flex-col items-center justify-center bg-[#050407] transition-opacity duration-1000 px-4 text-center">
           <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
 
           <button
@@ -343,38 +343,39 @@ export default function App() {
       )}
 
       {/* ==========================================
-          CONTENEDOR PRINCIPAL 100VH (SIN HEADER)
+          CONTENEDOR PRINCIPAL 100DVH (SIN HEADER)
           ========================================== */}
       <div
-        className={`relative w-full h-screen flex flex-col justify-between transition-all duration-1000 ease-out ${
+        id="mainExperience"
+        className={`relative w-full h-[100dvh] flex flex-col justify-between transition-all duration-1000 ease-out ${
           isLandingVisible ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
         }`}
       >
-        {/* 1. Fondo base con la imagen carta real OG */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* 1. Fondo base con la imagen carta real OG ocupando h-full del 100dvh */}
+        <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
           <img
             src="./assets/aistudio/carta_real_OG_ef0c69ed.png"
             alt="Escena nocturna Carta Real"
             className="w-full h-full object-cover object-center opacity-90"
           />
 
-          <div className="aurora-layer absolute inset-0 opacity-60" />
+          <div className="aurora-layer absolute inset-0 w-full h-full opacity-60" />
 
           {/* Bokeh decorativo sutil */}
           <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-amber-400/10 blur-3xl" />
           <div className="absolute top-1/3 right-1/4 w-72 h-72 rounded-full bg-cyan-400/10 blur-3xl" />
 
-          <div className="vignette-overlay absolute inset-0 opacity-75" />
+          <div className="vignette-overlay absolute inset-0 w-full h-full opacity-75" />
         </div>
 
         {/* 2. Partículas */}
         <GoldParticlesCanvas />
 
         {/* ==========================================
-            ESCENARIO CENTRAL DE CRISTAL EXPANDIDO HACIA ARRIBA
+            ESCENARIO CENTRAL DE CRISTAL CENTRADO
             ========================================== */}
-        <main className="relative z-20 flex-1 flex flex-col items-center justify-center px-3 sm:px-8 pt-6 pb-4 pointer-events-none">
-          <div className="relative w-full max-w-5xl flex items-center justify-center pointer-events-auto">
+        <main className="relative z-20 flex-1 min-h-0 flex flex-col items-center justify-center px-3 sm:px-8 py-2 sm:py-4 pointer-events-none">
+          <div className="relative w-full max-w-5xl mt-auto mb-auto flex items-center justify-center pointer-events-auto">
             {/* 1. Frase Flotante Superior Izquierda: "Our Song" (Celeste Cian / Plateado) */}
             <div className="hidden sm:flex flex-col items-center absolute -left-2 md:left-2 lg:left-4 -top-14 md:-top-12 z-30 animate-float-left select-none pointer-events-none">
               <div className="flex items-center space-x-1.5 -rotate-12 mb-1.5">
@@ -471,10 +472,10 @@ export default function App() {
               </div>
             </div>
 
-            {/* Tarjeta Central de Cristal Expandida */}
-            <div className="glass-lyric-backdrop relative w-full max-w-4xl min-h-[240px] sm:min-h-[310px] md:min-h-[360px] flex flex-col items-center justify-center rounded-3xl px-5 py-8 sm:px-12 sm:py-12 md:px-16 md:py-14 text-center transition-all duration-500">
+            {/* Tarjeta Central de Cristal Centrada (sin translate-y) */}
+            <div className="glass-lyric-backdrop relative w-full max-w-4xl min-h-[200px] sm:min-h-[300px] md:min-h-[350px] mt-auto mb-auto flex flex-col items-center justify-center rounded-3xl px-5 py-6 sm:px-12 sm:py-12 md:px-16 md:py-14 text-center transition-all duration-500">
               {/* Frases superiores compactas en móvil (Celeste Cian) */}
-              <div className="flex sm:hidden w-full justify-between items-center mb-4 px-1">
+              <div className="flex sm:hidden w-full justify-between items-center mb-3 px-1">
                 <span className="font-handwritten text-lg -rotate-3 floating-cyan-note flex items-center gap-1">
                   Our Song ✦
                 </span>
@@ -486,7 +487,7 @@ export default function App() {
               {/* Español Arriba (Dorado) */}
               <h2
                 id="primaryLyricText"
-                className={`font-serif-luxury text-xl sm:text-3xl md:text-5xl font-semibold leading-snug sm:leading-tight tracking-wide gold-glow-text mb-3 sm:mb-5 transition-all duration-300 ${
+                className={`font-serif-luxury text-xl sm:text-3xl md:text-5xl font-semibold leading-snug sm:leading-tight tracking-wide gold-glow-text mb-2.5 sm:mb-5 transition-all duration-300 ${
                   isTransitioning
                     ? 'opacity-0 translate-y-2 scale-98'
                     : 'opacity-100 translate-y-0 scale-100'
@@ -506,7 +507,7 @@ export default function App() {
               </p>
 
               {/* Frases inferiores compactas en móvil (Celeste Cian) */}
-              <div className="flex sm:hidden w-full justify-between items-center mt-4 px-1">
+              <div className="flex sm:hidden w-full justify-between items-center mt-3 px-1">
                 <span className="font-handwritten text-lg rotate-2 floating-cyan-note">
                   My Love ✦
                 </span>
@@ -519,10 +520,10 @@ export default function App() {
         </main>
 
         {/* ==========================================
-            BARRA DE REPRODUCTOR INFERIOR (RESPONSIVE)
+            BARRA DE REPRODUCTOR INFERIOR (RESPONSIVE + SAFE AREA)
             ========================================== */}
-        <footer className="relative z-30 w-full px-2.5 sm:px-8 pb-2.5 sm:pb-5">
-          <div className="glass-player-bar w-full max-w-[1400px] mx-auto rounded-2xl px-3.5 py-2.5 sm:px-7 sm:py-4 flex flex-col md:flex-row items-center justify-between gap-2.5 md:gap-6">
+        <footer className="relative z-30 w-full shrink-0 px-2.5 sm:px-8 pb-4 sm:pb-5 mb-safe pb-[calc(1rem+env(safe-area-inset-bottom,0px))] sm:pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))]">
+          <div className="glass-player-bar w-full max-w-[1400px] mx-auto rounded-2xl px-3.5 py-2.5 sm:px-7 sm:py-4 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-6">
             {/* Izquierda (Artista) */}
             <div className="w-full md:w-[28%] flex items-center justify-between md:justify-start space-x-3">
               <div className="flex items-center space-x-2.5 sm:space-x-3.5 min-w-0">

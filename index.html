@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="h-[100dvh]">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Carta Real — Experiencia Musical Interactiva | Miky Woodz</title>
     <meta
       name="description"
@@ -109,10 +109,14 @@
         padding: 0;
         width: 100%;
         height: 100vh;
+        height: 100dvh;
         overflow: hidden;
         background-color: #050407;
         font-family: 'Montserrat', sans-serif;
         color: #ffffff;
+      }
+      .mb-safe {
+        margin-bottom: env(safe-area-inset-bottom, 0px);
       }
       .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
       .font-sans-clean { font-family: 'Montserrat', sans-serif; }
@@ -198,7 +202,7 @@
       .floating-heart-burst { position: fixed; pointer-events: none; z-index: 9999; animation: floatUpHeart 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     </style>
   </head>
-  <body class="bg-[#050407] text-white antialiased selection:bg-amber-400 selection:text-black">
+  <body class="h-[100dvh] bg-[#050407] text-white antialiased selection:bg-amber-400 selection:text-black">
     <div id="root"></div>
     <script type="module" src="./src/main.tsx"></script>
 
@@ -215,10 +219,10 @@
 
       function mountStandaloneCartaReal(root) {
         root.innerHTML = `
-          <div class="relative w-full h-screen overflow-hidden select-none bg-[#050407]">
+          <div class="relative w-full h-[100dvh] overflow-hidden select-none bg-[#050407]">
             <audio id="realAudioPlayer" src="./public/Carta_Real.mp3" preload="auto" loop></audio>
 
-            <div id="landingScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050407] transition-opacity duration-1000 px-4 text-center">
+            <div id="landingScreen" class="fixed inset-0 h-[100dvh] z-50 flex flex-col items-center justify-center bg-[#050407] transition-opacity duration-1000 px-4 text-center">
               <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none"></div>
               <button id="openLetterBtn" aria-label="Abrir Carta Real" class="group relative flex flex-col items-center justify-center focus:outline-none cursor-pointer p-6 sm:p-8">
                 <div id="envelopeIcon" class="envelope-landing text-7xl sm:text-8xl md:text-9xl select-none">💌</div>
@@ -229,22 +233,22 @@
               </button>
             </div>
 
-            <div id="mainExperience" class="relative w-full h-screen flex flex-col justify-between opacity-0 scale-105 transition-all duration-1000 ease-out">
-              <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <div id="mainExperience" class="relative w-full h-[100dvh] flex flex-col justify-between opacity-0 scale-105 transition-all duration-1000 ease-out">
+              <div class="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
                 <img
                   src="./public/assets/aistudio/carta_real_OG_ef0c69ed.png"
                   onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='./assets/aistudio/carta_real_OG_ef0c69ed.png';}"
                   alt="Escena nocturna Carta Real"
                   class="w-full h-full object-cover object-center opacity-90"
                 />
-                <div class="aurora-layer absolute inset-0 opacity-60"></div>
-                <div class="vignette-overlay absolute inset-0 opacity-75"></div>
+                <div class="aurora-layer absolute inset-0 w-full h-full opacity-60"></div>
+                <div class="vignette-overlay absolute inset-0 w-full h-full opacity-75"></div>
               </div>
 
-              <canvas id="goldParticlesCanvas" class="absolute inset-0 z-10 pointer-events-none"></canvas>
+              <canvas id="goldParticlesCanvas" class="absolute inset-0 w-full h-full z-10 pointer-events-none"></canvas>
 
-              <main class="relative z-20 flex-1 flex flex-col items-center justify-center px-3 sm:px-8 pt-6 pb-4 pointer-events-none">
-                <div class="relative w-full max-w-5xl flex items-center justify-center pointer-events-auto">
+              <main class="relative z-20 flex-1 min-h-0 flex flex-col items-center justify-center px-3 sm:px-8 py-2 sm:py-4 pointer-events-none">
+                <div class="relative w-full max-w-5xl mt-auto mb-auto flex items-center justify-center pointer-events-auto">
                   <div class="hidden sm:flex flex-col items-center absolute -left-2 md:left-2 lg:left-4 -top-14 md:-top-12 z-30 animate-float-left select-none">
                     <div class="flex items-center space-x-1.5 -rotate-12 mb-1.5">
                       <span class="font-handwritten text-2xl md:text-3xl floating-cyan-note tracking-wide">Our Song</span>
@@ -268,18 +272,18 @@
                     </div>
                   </div>
 
-                  <div class="glass-lyric-backdrop relative w-full max-w-4xl min-h-[240px] sm:min-h-[310px] md:min-h-[360px] flex flex-col items-center justify-center rounded-3xl px-5 py-8 sm:px-12 sm:py-12 md:px-16 md:py-14 text-center transition-all duration-500">
-                    <div class="flex sm:hidden w-full justify-between items-center mb-4 px-1">
+                  <div class="glass-lyric-backdrop relative w-full max-w-4xl min-h-[200px] sm:min-h-[300px] md:min-h-[350px] mt-auto mb-auto flex flex-col items-center justify-center rounded-3xl px-5 py-6 sm:px-12 sm:py-12 md:px-16 md:py-14 text-center transition-all duration-500">
+                    <div class="flex sm:hidden w-full justify-between items-center mb-3 px-1">
                       <span class="font-handwritten text-lg -rotate-3 floating-cyan-note">Our Song ✦</span>
                       <span class="font-handwritten text-lg rotate-3 floating-cyan-note">My Favorite ✦</span>
                     </div>
-                    <h2 id="primaryLyricText" class="lyric-transition font-serif-luxury text-xl sm:text-3xl md:text-5xl font-semibold leading-snug sm:leading-tight tracking-wide gold-glow-text mb-3 sm:mb-5">
+                    <h2 id="primaryLyricText" class="lyric-transition font-serif-luxury text-xl sm:text-3xl md:text-5xl font-semibold leading-snug sm:leading-tight tracking-wide gold-glow-text mb-2.5 sm:mb-5">
                       Carta Real — Miky Woodz
                     </h2>
                     <p id="secondaryLyricText" class="lyric-transition font-sans-clean text-xs sm:text-base md:text-xl font-normal tracking-wide text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
                       Royal Letter — Especially for you ✨
                     </p>
-                    <div class="flex sm:hidden w-full justify-between items-center mt-4 px-1">
+                    <div class="flex sm:hidden w-full justify-between items-center mt-3 px-1">
                       <span class="font-handwritten text-lg rotate-2 floating-cyan-note">My Love ✦</span>
                       <span class="font-handwritten text-lg -rotate-2 floating-cyan-note">Always Yours ✦</span>
                     </div>
@@ -287,8 +291,8 @@
                 </div>
               </main>
 
-              <footer class="relative z-30 w-full px-2.5 sm:px-8 pb-2.5 sm:pb-5">
-                <div class="glass-player-bar w-full max-w-[1400px] mx-auto rounded-2xl px-3.5 py-2.5 sm:px-7 sm:py-4 flex flex-col md:flex-row items-center justify-between gap-2.5 md:gap-6">
+              <footer class="relative z-30 w-full shrink-0 px-2.5 sm:px-8 pb-4 sm:pb-5 mb-safe pb-[calc(1rem+env(safe-area-inset-bottom,0px))] sm:pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))]">
+                <div class="glass-player-bar w-full max-w-[1400px] mx-auto rounded-2xl px-3.5 py-2.5 sm:px-7 sm:py-4 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-6">
                   <div class="w-full md:w-[28%] flex items-center justify-between md:justify-start space-x-3">
                     <div class="flex items-center space-x-2.5 sm:space-x-3.5 min-w-0">
                       <div id="albumArtThumb" class="relative w-10 h-10 sm:w-14 sm:h-14 rounded-xl overflow-hidden border border-amber-400/50 shadow-[0_0_15px_rgba(255,215,0,0.25)] shrink-0 group cursor-pointer">
