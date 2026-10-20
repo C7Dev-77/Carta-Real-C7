@@ -127,6 +127,26 @@ export default function App() {
     audioRef.current.muted = isMuted;
   }, [volume, isMuted]);
 
+  // Dynamic Canonical & og:url Resolution for SEO indexing
+  useEffect(() => {
+    const canonicalUrl = window.location.origin + window.location.pathname;
+    let link = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!link) {
+      link = document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      document.head.appendChild(link);
+    }
+    link.setAttribute('href', canonicalUrl);
+
+    let ogUrl = document.querySelector<HTMLMetaElement>('meta[property="og:url"]');
+    if (!ogUrl) {
+      ogUrl = document.createElement('meta');
+      ogUrl.setAttribute('property', 'og:url');
+      document.head.appendChild(ogUrl);
+    }
+    ogUrl.setAttribute('content', canonicalUrl);
+  }, []);
+
   // Envelope Open Handler
   const handleOpenEnvelope = () => {
     setIsExploding(true);

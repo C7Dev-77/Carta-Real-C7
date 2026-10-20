@@ -1,6 +1,6 @@
 {
-  "name": "Carta Real — Miky Woodz Interactive Experience",
-  "description": "Experiencia web interactiva y sincronizador milimétrico de letras para Carta Real de Miky Woodz con audio real y exportación de código synchronizedLyrics.",
+  "name": "Carta Real — Experiencia Musical Interactiva | Miky Woodz",
+  "description": "Vive la experiencia musical interactiva de Carta Real de Miky Woodz con letras sincronizadas en español e inglés, efectos dorados y dedicatoria especial.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
