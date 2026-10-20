@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta Real 💌 — Especialmente para ti</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Tone.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <style>
+        :root {
+            --gold-light: #FFF3B0;
+            --gold-primary: #FFD700;
+            --gold-metallic: #D4AF37;
+            --gold-dark: #996515;
+            --void-black: #050407;
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--void-black);
+            font-family: 'Montserrat', sans-serif;
+            color: #ffffff;
+        }
+
+        /* Clases de utilidad para fuentes */
+        .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+        .font-sans-clean { font-family: 'Montserrat', sans-serif; }
+        .font-handwritten { font-family: 'Caveat', cursive; }
+
+        /* Efecto de texto dorado luminoso */
+        .gold-glow-text {
+            background: linear-gradient(180deg, #FFFFFF 0%, #FFE885 35%, #D4AF37 80%, #AA7C11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.45)) drop-shadow(0 4px 20px rgba(0, 0, 0, 0.9));
+        }
+
+        .gold-header-text {
+            background: linear-gradient(135deg, #FFF6D6 0%, #FFD700 50%, #C59B27 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.35));
+        }
+
+        /* Capas de fondo y viñeta */
+        .aurora-layer {
+            background: 
+                radial-gradient(ellipse 80% 35% at 75% 22%, rgba(16, 185, 129, 0.22) 0%, rgba(5, 150, 105, 0.08) 45%, transparent 75%),
+                radial-gradient(ellipse 70% 40% at 25% 28%, rgba(212, 175, 55, 0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 90% 50% at 50% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 80%);
+            mix-blend-mode: screen;
+            animation: auroraWave 14s ease-in-out infinite alternate;
+        }
+
+        @keyframes auroraWave {
+            0% { transform: scale(1) translate(0px, 0px) rotate(0deg); opacity: 0.75; }
+            50% { transform: scale(1.06) translate(-15px, 8px) rotate(1deg); opacity: 0.95; }
+            100% { transform: scale(1.02) translate(15px, -6px) rotate(-1deg); opacity: 0.8; }
+        }
+
+        .vignette-overlay {
+            background: 
+                radial-gradient(circle at 50% 42%, transparent 25%, rgba(5, 4, 7, 0.55) 65%, rgba(5, 4, 7, 0.95) 100%),
+                linear-gradient(180deg, rgba(5, 4, 7, 0.85) 0%, transparent 18%, transparent 55%, rgba(5, 4, 7, 0.92) 88%, #050407 100%);
+        }
+
+        /* Glassmorphism */
+        .glass-lyric-backdrop {
+            background: radial-gradient(ellipse at center, rgba(20, 16, 12, 0.52) 0%, rgba(10, 8, 6, 0.28) 65%, transparent 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.14);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), inset 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+
+        .glass-player-bar {
+            background: linear-gradient(135deg, rgba(24, 20, 15, 0.72) 0%, rgba(12, 10, 8, 0.85) 50%, rgba(24, 19, 12, 0.75) 100%);
+            backdrop-filter: blur(22px) saturate(160%);
+            -webkit-backdrop-filter: blur(22px) saturate(160%);
+            border: 1px solid rgba(255, 215, 0, 0.42);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(212, 175, 55, 0.18), inset 0 1px 1px rgba(255, 243, 176, 0.35), inset 0 -1px 12px rgba(212, 175, 55, 0.1);
+        }
+
+        .glass-pill-gold {
+            background: rgba(20, 16, 10, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 215, 0, 0.38);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.12), inset 0 0 8px rgba(255, 215, 0, 0.08);
+        }
+
+        /* Botón de Play metálico */
+        .gold-circle-btn {
+            background: radial-gradient(circle at 30% 25%, #FFF8D6 0%, #FFD700 35%, #D4AF37 70%, #9A6F1A 100%);
+            box-shadow: 0 0 22px rgba(255, 215, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.6), inset 0 2px 3px rgba(255, 255, 255, 0.7);
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .gold-circle-btn:hover { transform: scale(1.08); box-shadow: 0 0 32px rgba(255, 215, 0, 0.85), 0 6px 16px rgba(0, 0, 0, 0.7), inset 0 2px 4px rgba(255, 255, 255, 0.9); }
+        .gold-circle-btn:active { transform: scale(0.96); }
+
+        /* Animaciones flotantes */
+        @keyframes floatSlow { 0%, 100% { transform: translateY(0px) rotate(-4deg); } 50% { transform: translateY(-9px) rotate(3deg); } }
+        @keyframes floatSlowReverse { 0%, 100% { transform: translateY(0px) rotate(4deg); } 50% { transform: translateY(-10px) rotate(-3deg); } }
+        
+        .animate-float-left { animation: floatSlow 5.5s ease-in-out infinite; }
+        .animate-float-right { animation: floatSlowReverse 6s ease-in-out infinite; }
+        .animate-ping-slow { animation: ping 3s cubic-bezier(0, 0, 0.2, 1) infinite; }
+
+        .neon-gold-heart {
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.75)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.45));
+        }
+
+        /* Animación del sobre inicial */
+        @keyframes envelopeBreathe {
+            0%, 100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 18px rgba(255, 215, 0, 0.45)) drop-shadow(0 0 35px rgba(230, 25, 75, 0.35)); }
+            30% { transform: translateY(-6px) scale(1.06); filter: drop-shadow(0 0 28px rgba(255, 215, 0, 0.85)) drop-shadow(0 0 55px rgba(255, 107, 139, 0.55)); }
+            50% { transform: translateY(-8px) scale(1.02); filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6)); }
+            70% { transform: translateY(-5px) scale(1.08); filter: drop-shadow(0 0 34px rgba(255, 215, 0, 0.95)) drop-shadow(0 0 65px rgba(230, 25, 75, 0.65)); }
+        }
+
+        .envelope-landing { animation: envelopeBreathe 3.2s infinite ease-in-out; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease; }
+        .envelope-explode { animation: none !important; transform: scale(14) !important; opacity: 0 !important; filter: brightness(3) drop-shadow(0 0 80px #FFD700) !important; transition: transform 0.85s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.75s ease, filter 0.6s ease !important; }
+
+        /* Sliders personalizados */
+        .gold-slider-track { background: rgba(255, 255, 255, 0.16); box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6); }
+        .gold-slider-fill { background: linear-gradient(90deg, #B38728 0%, #FFD700 60%, #FFF6C4 100%); box-shadow: 0 0 12px rgba(255, 215, 0, 0.75); }
+        .gold-slider-thumb { background: #FFFDF2; border: 2px solid #FFD700; box-shadow: 0 0 12px #FFD700, 0 0 20px rgba(255, 215, 0, 0.8); transition: transform 0.15s ease; }
+        
+        .group:hover .gold-slider-thumb { transform: scale(1.3); }
+
+        /* Transiciones de texto */
+        .lyric-transition { transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+        .lyric-hidden { opacity: 0; transform: translateY(10px) scale(0.98); }
+
+        /* Corazones flotantes */
+        @keyframes floatUpHeart { 0% { transform: translateY(0) scale(0.7) rotate(0deg); opacity: 1; } 100% { transform: translateY(-75px) scale(1.35) rotate(18deg); opacity: 0; } }
+        .floating-heart-burst { position: fixed; pointer-events: none; z-index: 9999; animation: floatUpHeart 1.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* Clases para centralizar estilos en línea */
+        .hero-image-mask {
+            mask-image: radial-gradient(ellipse 68% 68% at 50% 42%, black 35%, rgba(0,0,0,0.6) 62%, transparent 92%);
+            -webkit-mask-image: radial-gradient(ellipse 68% 68% at 50% 42%, black 35%, rgba(0,0,0,0.6) 62%, transparent 92%);
+            filter: contrast(1.08) saturate(1.15) sepia(0.15);
+        }
+        
+        /* Estados iniciales de los sliders para evitar saltos */
+        #progressBarFill, #volumeBarFill { width: 0%; }
+        #progressBarThumb, #volumeBarThumb { left: 0%; }
+    </style>
+</head>
+<body class="relative w-full h-screen overflow-hidden select-none bg-[#050407]">
+
+    <!-- ==========================================
+         FASE 1: PANTALLA DE BIENVENIDA (LANDING)
+         ========================================== -->
+    <div id="landingScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050407] transition-opacity duration-1000">
+        <div class="absolute w-96 h-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none"></div>
+        
+        <button id="openLetterBtn" aria-label="Abrir Carta Real" class="group relative flex flex-col items-center justify-center focus:outline-none cursor-pointer p-8">
+            <div id="envelopeIcon" class="envelope-landing text-7xl sm:text-8xl md:text-9xl select-none">
+                💌
+            </div>
+            
+            <div class="mt-8 flex flex-col items-center space-y-2 transition-all duration-500 opacity-80 group-hover:opacity-100 group-hover:translate-y-1">
+                <span class="font-serif-luxury italic text-lg sm:text-xl tracking-widest gold-header-text">
+                    Tienes una Carta Real pendiente...
+                </span>
+                <span class="text-xs uppercase tracking-[0.3em] text-amber-200/50 font-sans-clean">
+                    Haz clic para abrir
+                </span>
+            </div>
+        </button>
+    </div>
+
+    <!-- ==========================================
+         CAPA DE FONDO CINEMATOGRÁFICO (100VH)
+         ========================================== -->
+    <div id="mainExperience" class="relative w-full h-screen flex flex-col justify-between opacity-0 scale-105 transition-all duration-1000 ease-out">
+        
+        <!-- 1. Fondo base -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <!-- Imagen optimizada (w=1200, q=80) -->
+            <img 
+                src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80" 
+                alt="Horizonte nocturno" 
+                class="w-full h-full object-cover object-bottom opacity-35 scale-105 filter blur-[2px] contrast-125"
+                onerror="this.src='https://placehold.co/1200x800/070508/D4AF37?text=Carta+Real'"
+            />
+
+            <div class="aurora-layer absolute inset-0"></div>
+
+            <div class="absolute inset-0 flex justify-center items-start pt-4 sm:pt-8">
+                <div class="relative w-full max-w-5xl h-[82vh] flex justify-center">
+                    <!-- Imagen optimizada (w=1200, q=80) y clase de máscara -->
+                    <img 
+                        id="heroCoupleImage"
+                        src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80" 
+                        alt="Pareja abrazándose bajo luces doradas" 
+                        class="w-full h-full object-cover object-top opacity-85 hero-image-mask"
+                        onerror="this.src='https://placehold.co/1000x800/120d08/FFD700?text=Nuestra+Historia'"
+                    />
+                </div>
+            </div>
+
+            <!-- Bokeh decorativo -->
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-amber-400/15 blur-3xl"></div>
+            <div class="absolute top-1/3 right-1/4 w-72 h-72 rounded-full bg-yellow-500/15 blur-3xl"></div>
+            <div class="absolute bottom-1/3 left-1/3 w-96 h-48 rounded-full bg-amber-300/10 blur-3xl"></div>
+
+            <div class="vignette-overlay absolute inset-0"></div>
+        </div>
+
+        <!-- 2. Partículas -->
+        <canvas id="goldParticlesCanvas" class="absolute inset-0 z-10 pointer-events-none"></canvas>
+
+        <!-- ==========================================
+             BARRA DE NAVEGACIÓN SUPERIOR
+             ========================================== -->
+        <header class="relative z-30 w-full px-5 sm:px-10 pt-4 sm:pt-6 pb-3 flex items-center justify-between border-b border-amber-400/15 bg-gradient-to-b from-black/80 via-black/40 to-transparent">
+            
+            <!-- Izquierda -->
+            <div class="flex items-center space-x-3 group cursor-pointer" id="openLetterModalTop">
+                <h1 class="font-serif-luxury text-2xl sm:text-3xl md:text-4xl font-semibold tracking-wide gold-header-text">
+                    Carta Real
+                </h1>
+                <div class="relative flex items-center justify-center p-1.5 rounded-lg border border-amber-400/50 bg-amber-500/10 shadow-[0_0_15px_rgba(255,215,0,0.35)] group-hover:scale-105 transition-transform">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#FFD700]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                        <rect x="2" y="4" width="20" height="16" rx="2.5" stroke="currentColor" />
+                        <path d="M2 6.5L12 13L22 6.5" stroke="currentColor" stroke-linecap="round" />
+                        <path d="M12 11.2C11.4 10.5 10.2 10.5 9.7 11.2C9.2 11.9 9.5 12.9 12 14.3C14.5 12.9 14.8 11.9 14.3 11.2C13.8 10.5 12.6 10.5 12 11.2Z" fill="#FFD700" stroke="none"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Centro -->
+            <div class="hidden md:flex items-center space-x-2">
+                <span class="font-sans-clean font-light text-sm lg:text-base tracking-[0.18em] text-[#FFE89E] drop-shadow-[0_0_10px_rgba(255,215,0,0.4)]">
+                    Especialmente para ti ✨
+                </span>
+            </div>
+
+            <!-- Derecha -->
+            <div class="flex items-center space-x-3 sm:space-x-5">
+                
+                <!-- NUEVO: Botón de Silencio/Volumen -->
+                <button id="soundToggleBtn" aria-label="Alternar sonido" class="text-amber-200/75 hover:text-[#FFD700] transition-colors focus:outline-none">
+                    <svg id="soundOnIcon" class="w-5 h-5 fill-current hidden" viewBox="0 0 24 24">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                    <svg id="soundOffIcon" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                    </svg>
+                </button>
+
+                <!-- Toggle Idioma -->
+                <div class="glass-pill-gold rounded-full p-1 flex items-center space-x-1">
+                    <button id="langEsBtn" aria-label="Cambiar a Español" class="px-2.5 py-1 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black shadow-[0_0_12px_rgba(255,215,0,0.6)]">
+                        ES
+                    </button>
+                    <span class="text-amber-300/40 text-xs">|</span>
+                    <button id="langEnBtn" aria-label="Cambiar a Inglés" class="px-2.5 py-1 rounded-full text-xs font-medium tracking-wider transition-all duration-300 text-amber-200/75 hover:text-white">
+                        EN
+                    </button>
+                </div>
+
+                <!-- Avatar -->
+                <button id="profileAvatarBtn" aria-label="Ver Nuestra Carta Real" class="relative group focus:outline-none">
+                    <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full p-[1.5px] bg-gradient-to-tr from-[#996515] via-[#FFD700] to-[#FFF5C0] shadow-[0_0_16px_rgba(255,215,0,0.45)] group-hover:shadow-[0_0_24px_rgba(255,215,0,0.8)] transition-all">
+                        <!-- Imagen optimizada -->
+                        <img 
+                            src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=150&q=80" 
+                            alt="Avatar de la pareja" 
+                            class="w-full h-full rounded-full object-cover object-top"
+                            onerror="this.src='https://placehold.co/100x100/1a140b/FFD700?text=Tú+y+Yo'"
+                        />
+                    </div>
+                    <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#FFD700] border-2 border-black animate-pulse"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ==========================================
+             CONTENIDO CENTRAL
+             ========================================== -->
+        <main class="relative z-20 flex-1 flex flex-col items-center justify-end pb-6 sm:pb-10 px-4 sm:px-8 pointer-events-none">
+            
+            <div class="md:hidden mb-auto pt-2">
+                <span class="font-sans-clean font-light text-xs tracking-[0.18em] text-[#FFE89E] drop-shadow-[0_0_8px_rgba(255,215,0,0.4)]">
+                    Especialmente para ti ✨
+                </span>
+            </div>
+
+            <div class="relative w-full max-w-5xl flex items-center justify-center my-auto translate-y-6 sm:translate-y-12 pointer-events-auto">
+                
+                <!-- Decoración Izquierda -->
+                <div class="hidden sm:flex flex-col items-center absolute -left-2 md:left-4 lg:left-8 -top-10 md:-top-6 z-30 animate-float-left select-none">
+                    <div class="flex items-center space-x-1 -rotate-12 mb-3">
+                        <span class="font-handwritten text-2xl md:text-3xl text-[#FFE89E] tracking-wide drop-shadow-[0_2px_10px_rgba(255,215,0,0.5)]">
+                            Nuestra canción
+                        </span>
+                        <svg class="w-5 h-5 text-[#FFD700] animate-pulse" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 1L14.5 9.5L23 12L14.5 14.5L12 23L9.5 14.5L1 12L9.5 9.5L12 1Z"/>
+                        </svg>
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#FFD700]"></span>
+                        <span class="w-1 h-1 rounded-full bg-[#FFE89E]/70"></span>
+                    </div>
+                    <div class="neon-gold-heart transform -rotate-12 mt-2">
+                        <svg class="w-8 h-8 md:w-10 md:h-10 text-[#FFD700]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Letras -->
+                <div class="glass-lyric-backdrop relative w-full max-w-3xl rounded-3xl px-6 py-7 sm:px-12 sm:py-9 text-center transition-all duration-500">
+                    
+                    <div class="flex sm:hidden justify-between items-center mb-3 px-2 text-[#FFE89E]">
+                        <span class="font-handwritten text-xl -rotate-6 flex items-center gap-1">
+                            Nuestra canción ✨
+                        </span>
+                        <span class="font-handwritten text-xl rotate-6 flex items-center gap-1">
+                            Mi Favorita 💛
+                        </span>
+                    </div>
+
+                    <h2 id="primaryLyricText" class="lyric-transition font-serif-luxury text-2xl sm:text-4xl md:text-5xl lg:text-[3.35rem] font-semibold leading-tight tracking-wide gold-glow-text mb-3 sm:mb-4">
+                        Por ti yo vuelo como una en el morro...
+                    </h2>
+
+                    <p id="secondaryLyricText" class="lyric-transition font-sans-clean text-sm sm:text-lg md:text-xl lg:text-2xl font-normal tracking-wide text-white/95 drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+                        Ya ni camino ni corro, no te amo, te adoro
+                    </p>
+
+                    <div class="mt-4 flex items-center justify-center space-x-2 opacity-60 hover:opacity-100 transition-opacity">
+                        <span class="text-[11px] uppercase tracking-[0.25em] text-amber-200/80" id="verseCounterText">
+                            Verso Sincronizado • Carta Real
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Decoración Derecha -->
+                <div class="hidden sm:flex flex-col items-center absolute -right-2 md:right-4 lg:right-8 -top-8 md:-top-4 z-30 animate-float-right select-none">
+                    <div class="flex items-center space-x-1.5 rotate-12 mb-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#FFD700]"></span>
+                        <span class="font-handwritten text-2xl md:text-3xl text-[#FFE89E] tracking-wide drop-shadow-[0_2px_10px_rgba(255,215,0,0.5)]">
+                            Mi Favorita
+                        </span>
+                        <svg class="w-4 h-4 text-[#FFD700] animate-ping-slow" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 1L14.5 9.5L23 12L14.5 14.5L12 23L9.5 14.5L1 12L9.5 9.5L12 1Z"/>
+                        </svg>
+                    </div>
+                    <div class="neon-gold-heart transform rotate-12 mt-1">
+                        <svg class="w-8 h-8 md:w-10 md:h-10 text-[#FFD700]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- ==========================================
+             BARRA DE REPRODUCTOR INFERIOR
+             ========================================== -->
+        <footer class="relative z-30 w-full px-3 sm:px-8 pb-3 sm:pb-5">
+            <div class="glass-player-bar w-full max-w-[1400px] mx-auto rounded-2xl px-4 py-3 sm:px-7 sm:py-4 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6">
+                
+                <!-- Izquierda (Artista) -->
+                <div class="w-full md:w-[28%] flex items-center justify-between md:justify-start space-x-3.5">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden border border-amber-400/50 shadow-[0_0_15px_rgba(255,215,0,0.25)] shrink-0 group cursor-pointer" id="albumArtThumb">
+                            <img 
+                                src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=150&q=80" 
+                                alt="Portada Carta Real" 
+                                class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
+                                onerror="this.src='https://placehold.co/120x120/1a140b/FFD700?text=CR'"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <div class="flex items-center space-x-2">
+                                <!-- Nombre corregido a Miky Woodz -->
+                                <span class="font-sans-clean text-sm sm:text-base font-semibold text-white tracking-wide whitespace-nowrap">
+                                    Carta Real - Miky Woodz
+                                </span>
+                            </div>
+                            <div class="flex items-center space-x-2 mt-1">
+                                <button id="likeHeartBtn" aria-label="Marcar como favorito" class="text-[#FFD700] hover:scale-125 active:scale-95 transition-transform focus:outline-none drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                </button>
+                                <span class="text-[11px] text-amber-200/70 hidden sm:inline">Dedicada a ti</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="mobileLetterBtn" aria-label="Leer carta" class="md:hidden px-3 py-1.5 rounded-lg border border-amber-400/40 bg-amber-500/10 text-xs text-[#FFE89E] font-medium">
+                        Leer Carta 💌
+                    </button>
+                </div>
+
+                <!-- Centro (Controles) -->
+                <div class="w-full md:w-[46%] flex flex-col items-center justify-center space-y-2">
+                    
+                    <div class="flex items-center space-x-4 sm:space-x-6">
+                        
+                        <!-- Shuffle -->
+                        <button id="shuffleBtn" aria-label="Aleatorio" class="text-[#D4AF37] hover:text-[#FFD700] hover:scale-110 transition-all focus:outline-none">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="16 3 21 3 21 8"></polyline>
+                                <line x1="4" y1="20" x2="21" y2="3"></line>
+                                <polyline points="21 16 21 21 16 21"></polyline>
+                                <line x1="15" y1="15" x2="21" y2="21"></line>
+                                <line x1="4" y1="4" x2="9" y2="9"></line>
+                            </svg>
+                        </button>
+
+                        <!-- Anterior -->
+                        <button id="prevBtn" aria-label="Verso anterior" class="text-[#FFD700] hover:text-white hover:scale-110 transition-all focus:outline-none drop-shadow-[0_0_6px_rgba(255,215,0,0.4)]">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24">
+                                <path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/>
+                            </svg>
+                        </button>
+
+                        <!-- Play / Pause -->
+                        <button id="playPauseBtn" aria-label="Reproducir o Pausar" class="gold-circle-btn w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-[#120E07] focus:outline-none">
+                            <svg id="playIcon" class="w-5 h-5 sm:w-6 sm:h-6 fill-current ml-0.5 hidden" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <svg id="pauseIcon" class="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
+
+                        <!-- Siguiente -->
+                        <button id="nextBtn" aria-label="Siguiente verso" class="text-[#FFD700] hover:text-white hover:scale-110 transition-all focus:outline-none drop-shadow-[0_0_6px_rgba(255,215,0,0.4)]">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24">
+                                <path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/>
+                            </svg>
+                        </button>
+
+                        <!-- NUEVO: Reproducción Automática -->
+                        <button id="autoplayBtn" aria-label="Alternar reproducción automática" title="Reproducción automática" class="text-[#FFD700] hover:scale-110 transition-all focus:outline-none drop-shadow-[0_0_8px_rgba(255,215,0,0.6)]">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                            </svg>
+                        </button>
+
+                        <!-- Repeat -->
+                        <button id="repeatBtn" aria-label="Repetir siempre" class="text-[#FFD700] hover:scale-110 transition-all focus:outline-none drop-shadow-[0_0_8px_rgba(255,215,0,0.6)]">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="17 1 21 5 17 9"></polyline>
+                                <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                                <polyline points="7 23 3 19 7 15"></polyline>
+                                <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Barra de Progreso con ARIA -->
+                    <div class="w-full flex items-center space-x-3">
+                        <span id="timeLeftDisplay" class="font-sans-clean text-[11px] sm:text-xs text-white/90 font-medium tracking-wider shrink-0">
+                            0:00 / 3:45
+                        </span>
+
+                        <div id="progressBarContainer" role="slider" aria-label="Progreso de la canción" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0" class="group relative flex-1 h-2 flex items-center cursor-pointer py-2">
+                            <div class="gold-slider-track w-full h-1.5 rounded-full overflow-hidden">
+                                <div id="progressBarFill" class="gold-slider-fill h-full rounded-full transition-all duration-150"></div>
+                            </div>
+                            <div id="progressBarThumb" class="gold-slider-thumb absolute w-3.5 h-3.5 rounded-full -ml-1.5"></div>
+                        </div>
+
+                        <span id="timeRightDisplay" class="font-sans-clean text-[11px] sm:text-xs text-white/90 font-medium tracking-wider shrink-0">
+                            0:00 / 3:45
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Derecha (Volumen y Pantalla) -->
+                <div class="hidden md:flex md:w-[26%] flex-col items-end justify-center space-y-2.5">
+                    
+                    <div class="flex items-center space-x-2.5">
+                        <button id="openDedicationBtn" aria-label="Abrir carta personal" class="px-3.5 py-1.5 rounded-lg border border-amber-400/45 bg-gradient-to-b from-amber-500/15 to-amber-900/20 text-xs font-sans-clean font-medium text-[#FFF3B0] hover:border-[#FFD700] hover:shadow-[0_0_15px_rgba(255,215,0,0.35)] transition-all">
+                            Carta Personal 💌
+                        </button>
+                        <button id="fullscreenBtn" aria-label="Pantalla completa" class="px-3.5 py-1.5 rounded-lg border border-amber-400/45 bg-black/40 text-xs font-sans-clean font-medium text-white/90 hover:border-[#FFD700] hover:text-[#FFD700] transition-all">
+                            Pantalla Completa
+                        </button>
+                    </div>
+
+                    <!-- Control de Volumen con ARIA -->
+                    <div class="flex items-center space-x-2.5 w-36">
+                        <button id="muteBtn" aria-label="Volumen" class="text-[#FFD700] hover:scale-110 transition-transform focus:outline-none">
+                            <svg id="volumeIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                            </svg>
+                        </button>
+                        <div id="volumeBarContainer" role="slider" aria-label="Control de volumen" aria-valuemin="0" aria-valuemax="100" aria-valuenow="78" tabindex="0" class="group relative flex-1 h-2 flex items-center cursor-pointer">
+                            <div class="gold-slider-track w-full h-1.5 rounded-full overflow-hidden">
+                                <div id="volumeBarFill" class="gold-slider-fill h-full rounded-full"></div>
+                            </div>
+                            <div id="volumeBarThumb" class="gold-slider-thumb absolute w-3 h-3 rounded-full -ml-1.5"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+
+    <!-- ==========================================
+         MODAL DE DEDICATORIA PERSONAL
+         ========================================== -->
+    <div id="letterModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 transition-opacity duration-300">
+        <div class="glass-player-bar relative w-full max-w-lg rounded-3xl p-6 sm:p-10 border border-amber-400/60 text-center shadow-[0_0_60px_rgba(255,215,0,0.25)] transform scale-95 transition-transform duration-300" id="letterModalCard">
+            
+            <button id="closeLetterModal" aria-label="Cerrar carta" class="absolute top-4 right-5 text-amber-200/70 hover:text-[#FFD700] text-2xl focus:outline-none">
+                &times;
+            </button>
+
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-amber-500/15 border border-amber-400/50 mb-4 shadow-[0_0_20px_rgba(255,215,0,0.3)]">
+                <span class="text-3xl">💌</span>
+            </div>
+
+            <h3 class="font-serif-luxury text-2xl sm:text-3xl gold-header-text mb-2">
+                Mi Carta Real Para Ti
+            </h3>
+            <p class="font-handwritten text-xl text-amber-200/90 mb-5">
+                "No hay ninguna igual a ti..."
+            </p>
+
+            <div class="text-left font-sans-clean text-sm sm:text-base text-white/90 space-y-3 leading-relaxed bg-black/40 p-5 rounded-2xl border border-amber-500/20">
+                <p>
+                    Esta experiencia y esta canción son un recordatorio de que lo nuestro está por encima de cualquier momento difícil.
+                </p>
+                <p>
+                    Eres mi reina, mi cómplice y mi aliada en todo. Gracias por caminar conmigo, por tu lealtad y por hacer que cada día valga la pena.
+                </p>
+                <p class="text-right font-handwritten text-2xl text-[#FFD700] pt-2">
+                    Con todo mi amor ✨
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. VARIABLES GLOBALES Y ESTADO
+        // ==========================================
+        
+        // Letras sincronizadas extraídas de la canción original de Miky Woodz
+        const synchronizedLyrics = [
+            {
+                timeLabel: "2:14 / 3:45",
+                progress: 59.5,
+                esPrimary: "Por ti yo vuelo como una en el morro...",
+                esSecondary: "Ya ni camino ni corro, no te amo, te adoro",
+                enPrimary: "For you I fly high without a care...",
+                enSecondary: "I don't just love you, I adore you"
+            },
+            {
+                timeLabel: "2:22 / 3:45",
+                progress: 63.1,
+                esPrimary: "Todo fluyó, comencé a escribir lo que sentía...",
+                esSecondary: "Que tú eras mía, tú eras la bendición que a Dios le pedía",
+                enPrimary: "Everything flowed, I began to write what I felt...",
+                enSecondary: "That you were mine, you were the blessing I asked God for"
+            },
+            {
+                timeLabel: "2:31 / 3:45",
+                progress: 67.1,
+                esPrimary: "No hay ninguna igual a ti...",
+                esSecondary: "Más que cualquier fortuna, es tu valor",
+                enPrimary: "There is no one else like you...",
+                enSecondary: "More than any fortune, is your worth"
+            },
+            {
+                timeLabel: "2:40 / 3:45",
+                progress: 71.5,
+                esPrimary: "Y sé que este amor es real...",
+                esSecondary: "Porque no está' pendiente si es que alguno avisa",
+                enPrimary: "And I know this love is real...",
+                enSecondary: "Because it's not waiting to see if someone warns us"
+            },
+            {
+                timeLabel: "2:52 / 3:45",
+                progress: 76.4,
+                esPrimary: "Esta carta es real, como lo que siento por ti...",
+                esSecondary: "You are my queen, my ally in everything",
+                enPrimary: "This letter is real, just like what I feel for you...",
+                enSecondary: "Tú eres mi reina, mi aliada en todo"
+            }
+        ];
+
+        let currentVerseIndex = 0;
+        let currentLanguage = localStorage.getItem('cartaRealLang') || 'ES'; 
+        let isPlaying = false;
+        let autoplayEnabled = true; // Nuevo estado para el avance automático
+        let autoplayTimer = null;
+        let soundEnabled = true; // Estado para efectos de sonido (Tone.js)
+        let synthPad = null;
+
+        // ==========================================
+        // 2. REFERENCIAS AL DOM
+        // ==========================================
+        const landingScreen = document.getElementById('landingScreen');
+        const openLetterBtn = document.getElementById('openLetterBtn');
+        const envelopeIcon = document.getElementById('envelopeIcon');
+        const mainExperience = document.getElementById('mainExperience');
+
+        const primaryLyricText = document.getElementById('primaryLyricText');
+        const secondaryLyricText = document.getElementById('secondaryLyricText');
+        const timeLeftDisplay = document.getElementById('timeLeftDisplay');
+        const timeRightDisplay = document.getElementById('timeRightDisplay');
+        const progressBarFill = document.getElementById('progressBarFill');
+        const progressBarThumb = document.getElementById('progressBarThumb');
+        const progressBarContainer = document.getElementById('progressBarContainer');
+
+        const langEsBtn = document.getElementById('langEsBtn');
+        const langEnBtn = document.getElementById('langEnBtn');
+
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const likeHeartBtn = document.getElementById('likeHeartBtn');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        
+        // Nuevos elementos
+        const soundToggleBtn = document.getElementById('soundToggleBtn');
+        const soundOnIcon = document.getElementById('soundOnIcon');
+        const soundOffIcon = document.getElementById('soundOffIcon');
+        const autoplayBtn = document.getElementById('autoplayBtn');
+
+        // ==========================================
+        // 3. PERSISTENCIA Y CARGA INICIAL (LocalStorage)
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Comprobar si la carta ya fue abierta antes
+            if (localStorage.getItem('cartaOpened') === 'true') {
+                landingScreen.style.display = 'none';
+                mainExperience.classList.remove('opacity-0', 'scale-105');
+                mainExperience.classList.add('opacity-100', 'scale-100');
+            }
+
+            // Comprobar idioma guardado
+            if (currentLanguage === 'EN') {
+                switchLanguage('EN');
+            }
+
+            // Inicializar sliders con valores por defecto
+            updateProgressBar(synchronizedLyrics[0].progress);
+            updateVolumeBar(78); // 78% volumen por defecto
+        });
+
+        // ==========================================
+        // 4. AUDIO (Tone.js)
+        // ==========================================
+        async function playRomanticChime() {
+            if (!soundEnabled || typeof Tone === 'undefined') return;
+            try {
+                await Tone.start();
+                if (!synthPad) {
+                    synthPad = new Tone.PolySynth(Tone.Synth, {
+                        oscillator: { type: "sine" },
+                        envelope: { attack: 0.4, decay: 1.5, sustain: 0.2, release: 2.5 }
+                    }).toDestination();
+                    synthPad.volume.value = -18;
+                }
+                synthPad.triggerAttackRelease(["F4", "A4", "C5", "E5"], "2n");
+            } catch (err) {
+                // Ignorar restricciones de contexto de audio del navegador
+            }
+        }
+
+        // Botón para silenciar/activar sonido
+        soundToggleBtn.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            if (soundEnabled) {
+                soundOnIcon.classList.remove('hidden');
+                soundOffIcon.classList.add('hidden');
+                playRomanticChime(); // Feedback auditivo al activar
+            } else {
+                soundOnIcon.classList.add('hidden');
+                soundOffIcon.classList.remove('hidden');
+            }
+        });
+
+        // ==========================================
+        // 5. TRANSICIÓN DE ENTRADA
+        // ==========================================
+        openLetterBtn.addEventListener('click', () => {
+            envelopeIcon.classList.add('envelope-explode');
+            playRomanticChime();
+            
+            // Guardar en LocalStorage que ya se abrió
+            localStorage.setItem('cartaOpened', 'true');
+
+            setTimeout(() => {
+                landingScreen.classList.add('opacity-0', 'pointer-events-none');
+                mainExperience.classList.remove('opacity-0', 'scale-105');
+                mainExperience.classList.add('opacity-100', 'scale-100');
+                startPlayback();
+            }, 600);
+
+            setTimeout(() => {
+                landingScreen.style.display = 'none';
+            }, 1500);
+        });
+
+        // ==========================================
+        // 6. LÓGICA DE REPRODUCCIÓN Y LETRAS
+        // ==========================================
+        function renderCurrentVerse(animate = true) {
+            const verse = synchronizedLyrics[currentVerseIndex];
+
+            if (animate) {
+                primaryLyricText.classList.add('lyric-hidden');
+                secondaryLyricText.classList.add('lyric-hidden');
+
+                setTimeout(() => {
+                    updateLyricDOM(verse);
+                    primaryLyricText.classList.remove('lyric-hidden');
+                    secondaryLyricText.classList.remove('lyric-hidden');
+                }, 280);
+            } else {
+                updateLyricDOM(verse);
+            }
+        }
+
+        function updateLyricDOM(verse) {
+            if (currentLanguage === 'ES') {
+                primaryLyricText.textContent = verse.esPrimary;
+                secondaryLyricText.textContent = verse.esSecondary;
+            } else {
+                primaryLyricText.textContent = verse.enPrimary;
+                secondaryLyricText.textContent = verse.enSecondary;
+            }
+
+            timeLeftDisplay.textContent = verse.timeLabel;
+            timeRightDisplay.textContent = verse.timeLabel;
+            updateProgressBar(verse.progress);
+        }
+
+        function updateProgressBar(percentage) {
+            progressBarFill.style.width = `${percentage}%`;
+            progressBarThumb.style.left = `${percentage}%`;
+            progressBarContainer.setAttribute('aria-valuenow', percentage.toFixed(1));
+        }
+
+        // Bucle de reproducción usando setTimeout para mejor control (evita conflictos con pausas)
+        function playbackLoop() {
+            if (!isPlaying) return;
+            
+            if (autoplayEnabled) {
+                currentVerseIndex = (currentVerseIndex + 1) % synchronizedLyrics.length;
+                renderCurrentVerse(true);
+            }
+            
+            // Programar el siguiente salto en 6.5 segundos
+            autoplayTimer = setTimeout(playbackLoop, 6500);
+        }
+
+        function startPlayback() {
+            if (isPlaying) return;
+            isPlaying = true;
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+            
+            // Iniciar el bucle
+            clearTimeout(autoplayTimer);
+            autoplayTimer = setTimeout(playbackLoop, 6500);
+        }
+
+        function pausePlayback() {
+            isPlaying = false;
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            clearTimeout(autoplayTimer);
+        }
+
+        function togglePlayback() {
+            if (isPlaying) {
+                pausePlayback();
+            } else {
+                startPlayback();
+            }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlayback);
+
+        // Control de reproducción automática
+        autoplayBtn.addEventListener('click', () => {
+            autoplayEnabled = !autoplayEnabled;
+            if (autoplayEnabled) {
+                autoplayBtn.classList.remove('opacity-40');
+                autoplayBtn.setAttribute('title', 'Avance automático activado');
+                // Si estaba reproduciendo, reiniciar el temporizador
+                if (isPlaying) {
+                    clearTimeout(autoplayTimer);
+                    autoplayTimer = setTimeout(playbackLoop, 6500);
+                }
+            } else {
+                autoplayBtn.classList.add('opacity-40');
+                autoplayBtn.setAttribute('title', 'Avance automático desactivado');
+                clearTimeout(autoplayTimer);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentVerseIndex = (currentVerseIndex - 1 + synchronizedLyrics.length) % synchronizedLyrics.length;
+            renderCurrentVerse(true);
+            if (isPlaying && autoplayEnabled) {
+                clearTimeout(autoplayTimer);
+                autoplayTimer = setTimeout(playbackLoop, 6500);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentVerseIndex = (currentVerseIndex + 1) % synchronizedLyrics.length;
+            renderCurrentVerse(true);
+            if (isPlaying && autoplayEnabled) {
+                clearTimeout(autoplayTimer);
+                autoplayTimer = setTimeout(playbackLoop, 6500);
+            }
+        });
+
+        // ==========================================
+        // 7. CAMBIO DE IDIOMA Y PERSISTENCIA
+        // ==========================================
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('cartaRealLang', lang);
+
+            if (lang === 'ES') {
+                langEsBtn.className = "px-2.5 py-1 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black shadow-[0_0_12px_rgba(255,215,0,0.6)]";
+                langEnBtn.className = "px-2.5 py-1 rounded-full text-xs font-medium tracking-wider transition-all duration-300 text-amber-200/75 hover:text-white";
+            } else {
+                langEnBtn.className = "px-2.5 py-1 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black shadow-[0_0_12px_rgba(255,215,0,0.6)]";
+                langEsBtn.className = "px-2.5 py-1 rounded-full text-xs font-medium tracking-wider transition-all duration-300 text-amber-200/75 hover:text-white";
+            }
+            renderCurrentVerse(true);
+        }
+
+        langEsBtn.addEventListener('click', () => switchLanguage('ES'));
+        langEnBtn.addEventListener('click', () => switchLanguage('EN'));
+
+        // ==========================================
+        // 8. INTERACCIÓN CON SLIDERS (Progreso y Volumen)
+        // ==========================================
+        progressBarContainer.addEventListener('click', (e) => {
+            const rect = progressBarContainer.getBoundingClientRect();
+            const clickRatio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+            const percentage = (clickRatio * 100);
+            
+            updateProgressBar(percentage);
+
+            // Mapear a tiempo (3:45 = 225s)
+            const totalSeconds = 225;
+            const currentSec = Math.floor(clickRatio * totalSeconds);
+            const mins = Math.floor(currentSec / 60);
+            const secs = String(currentSec % 60).padStart(2, '0');
+            const formatted = `${mins}:${secs} / 3:45`;
+            timeLeftDisplay.textContent = formatted;
+            timeRightDisplay.textContent = formatted;
+
+            // Elegir el verso más cercano
+            const index = Math.min(synchronizedLyrics.length - 1, Math.floor(clickRatio * synchronizedLyrics.length));
+            currentVerseIndex = index;
+            
+            // Actualizar texto sin animación para respuesta inmediata
+            updateLyricDOM({
+                ...synchronizedLyrics[currentVerseIndex],
+                timeLabel: formatted,
+                progress: percentage
+            });
+        });
+
+        // Volumen Slider
+        const volumeBarContainer = document.getElementById('volumeBarContainer');
+        const volumeBarFill = document.getElementById('volumeBarFill');
+        const volumeBarThumb = document.getElementById('volumeBarThumb');
+
+        function updateVolumeBar(percentage) {
+            volumeBarFill.style.width = `${percentage}%`;
+            volumeBarThumb.style.left = `${percentage}%`;
+            volumeBarContainer.setAttribute('aria-valuenow', percentage);
+        }
+
+        volumeBarContainer.addEventListener('click', (e) => {
+            const rect = volumeBarContainer.getBoundingClientRect();
+            const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+            const pct = Math.round(ratio * 100);
+            updateVolumeBar(pct);
+        });
+
+        // ==========================================
+        // 9. EXTRAS (Corazones, Pantalla Completa, Modal)
+        // ==========================================
+        likeHeartBtn.addEventListener('click', (e) => {
+            const rect = likeHeartBtn.getBoundingClientRect();
+            for (let i = 0; i < 4; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart-burst text-amber-300 text-lg';
+                heart.innerHTML = '💛';
+                heart.style.left = `${rect.left + (Math.random() * 24 - 8)}px`;
+                heart.style.top = `${rect.top - 6}px`;
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 1250);
+            }
+            playRomanticChime();
+        });
+
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            } else {
+                document.exitFullscreen().catch(() => {});
+            }
+        });
+
+        // Modal Lógica
+        const letterModal = document.getElementById('letterModal');
+        const letterModalCard = document.getElementById('letterModalCard');
+        const openDedicationBtn = document.getElementById('openDedicationBtn');
+        const openLetterModalTop = document.getElementById('openLetterModalTop');
+        const profileAvatarBtn = document.getElementById('profileAvatarBtn');
+        const mobileLetterBtn = document.getElementById('mobileLetterBtn');
+        const albumArtThumb = document.getElementById('albumArtThumb');
+        const closeLetterModal = document.getElementById('closeLetterModal');
+
+        function showLetterModal() {
+            letterModal.classList.remove('hidden');
+            letterModal.classList.add('flex');
+            setTimeout(() => {
+                letterModal.classList.remove('opacity-0');
+                letterModalCard.classList.remove('scale-95');
+                letterModalCard.classList.add('scale-100');
+            }, 20);
+        }
+
+        function hideLetterModal() {
+            letterModal.classList.add('opacity-0');
+            letterModalCard.classList.remove('scale-100');
+            letterModalCard.classList.add('scale-95');
+            setTimeout(() => {
+                letterModal.classList.add('hidden');
+                letterModal.classList.remove('flex');
+            }, 300);
+        }
+
+        [openDedicationBtn, openLetterModalTop, profileAvatarBtn, mobileLetterBtn, albumArtThumb].forEach(btn => {
+            if (btn) btn.addEventListener('click', showLetterModal);
+        });
+        closeLetterModal.addEventListener('click', hideLetterModal);
+        letterModal.addEventListener('click', (e) => {
+            if (e.target === letterModal) hideLetterModal();
+        });
+
+        // ==========================================
+        // 10. SISTEMA DE PARTÍCULAS (Canvas)
+        // ==========================================
+        const canvas = document.getElementById('goldParticlesCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        class GoldenParticle {
+            constructor() {
+                this.reset(true);
+            }
+
+            reset(initial = false) {
+                this.x = Math.random() * canvas.width;
+                this.y = initial ? Math.random() * canvas.height : -15;
+                
+                // Mezcla de polvo de estrellas y orbes bokeh
+                const isBokeh = Math.random() < 0.22;
+                this.radius = isBokeh ? (Math.random() * 5 + 2.5) : (Math.random() * 1.8 + 0.6);
+                this.isBokeh = isBokeh;
+
+                this.speedY = Math.random() * 0.45 + 0.15;
+                this.speedX = (Math.random() - 0.5) * 0.35;
+                this.alpha = isBokeh ? (Math.random() * 0.35 + 0.1) : (Math.random() * 0.75 + 0.25);
+                this.twinkleSpeed = Math.random() * 0.025 + 0.008;
+                this.twinkleAngle = Math.random() * Math.PI * 2;
+                
+                const goldPalette = [
+                    '255, 215, 0', '255, 236, 158', '212, 175, 55', '255, 195, 77'
+                ];
+                this.color = goldPalette[Math.floor(Math.random() * goldPalette.length)];
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX + Math.sin(this.twinkleAngle) * 0.15;
+                this.twinkleAngle += this.twinkleSpeed;
+
+                // Repulsión sutil por el ratón
+                const dx = this.x - mouse.x;
+                const dy = this.y - mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 130) {
+                    this.x += (dx / dist) * 0.45;
+                    this.y += (dy / dist) * 0.45;
+                }
+
+                if (this.y > canvas.height + 20 || this.x < -20 || this.x > canvas.width + 20) {
+                    this.reset(false);
+                }
+            }
+
+            draw() {
+                const currentAlpha = Math.max(0.08, Math.min(1, this.alpha + Math.sin(this.twinkleAngle) * 0.22));
+                ctx.save();
+                ctx.beginPath();
+
+                if (this.isBokeh) {
+                    const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius * 2.2);
+                    grad.addColorStop(0, `rgba(${this.color}, ${currentAlpha})`);
+                    grad.addColorStop(0.5, `rgba(${this.color}, ${currentAlpha * 0.4})`);
+                    grad.addColorStop(1, `rgba(${this.color}, 0)`);
+                    ctx.fillStyle = grad;
+                    ctx.arc(this.x, this.y, this.radius * 2.2, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = `rgba(${this.color}, ${currentAlpha})`;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = `rgba(255, 215, 0, 0.8)`;
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                ctx.restore();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = window.innerWidth < 768 ? 75 : 145;
+            for (let i = 0; i < count; i++) {
+                particles.push(new GoldenParticle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('load', () => {
+            initParticles();
+            animateParticles();
+        });
+    </script>
+</body>
+</html>
